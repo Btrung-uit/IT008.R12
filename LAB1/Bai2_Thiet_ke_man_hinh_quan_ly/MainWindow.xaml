@@ -1,0 +1,83 @@
+<Window x:Class="QuanLySanPham.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLySanPham"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        MinHeight="450" MinWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0"  Grid.ColumnSpan="4" Grid.Row="0" HorizontalAlignment="Center" Margin="5" TextWrapping="NoWrap" Text="QUẢN LÝ SẢN PHẨM" FontSize="20" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" Grid.Row="1" Text="Mã sản phẩm" FontSize="12" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" Grid.Row="2" Text="Số lượng" FontSize="12" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="5" Grid.Row="1" Text="Tên sản phẩm" FontSize="12" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="5" Grid.Row="2" Text="Đơn giá" FontSize="12" VerticalAlignment="Center"/>
+
+        <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="20,0,20,0" x:Name="tbMaSP" TextWrapping="NoWrap" FontSize="10" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
+        <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,0,20,0" x:Name="tbSoLuong" TextWrapping="NoWrap" FontSize="10" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
+        <TextBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Margin="20,0,5,0" x:Name="tbTenSP" TextWrapping="NoWrap" FontSize="10" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
+        <TextBox Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,0,5,0" x:Name="tbDonGia" TextWrapping="NoWrap" FontSize="10" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
+
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="5">
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Orientation="Horizontal">
+                <Button Grid.Row="3" Content="Thêm" HorizontalAlignment="Left" Margin="0,0,2.5,0" Height="26" Width="65" VerticalAlignment="Center" Click="btnThem_Click"/>
+                <Button Content="Xóa" HorizontalAlignment="Left" Margin="2.5,0,2.5,0" Height="26" Width="65" VerticalAlignment="Center" Click="btnXoa_Click"/>
+                <Button x:Name="btnSua" HorizontalAlignment="Left" Margin="2.5,0,2.5,0" Height="26" Width="65" VerticalAlignment="Center" Click="btnSua_Click">
+                    <Grid>
+                        <Rectangle Stroke="Black" StrokeThickness="0.5" StrokeDashArray="1 2" Height="22" Width="60"/>
+                        <TextBlock Text="Sửa" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <Button DockPanel.Dock="Right" 
+            Content="Tìm kiếm" 
+            Width="75" 
+            Margin="10,0,70,0"
+            Click="btnTimKiem_Click"/>
+
+            <TextBox Height="26" 
+             Margin="30,0,0,0"
+             x:Name="tbTimKiem"
+             VerticalAlignment="Center" 
+             VerticalContentAlignment="Center"
+             KeyDown="TextBox_KeyDown"
+             TextChanged="tbTimKiem_TextChanged"/>
+        </DockPanel>
+
+        <DataGrid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4"
+                  x:Name="listSanPham" 
+                  SelectionChanged="listSanPham_SelectionChanged"
+                  Margin="5"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="All"
+                  IsReadOnly="True">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã sản phẩm" Width="90" Binding="{Binding maSP}"/>
+                <DataGridTextColumn Header="Tên sản phẩm" Width="1.5*" Binding="{Binding tenSP}"/>
+                <DataGridTextColumn Header="Số lượng" Width="0.5*" Binding="{Binding soLuong, StringFormat={}{0:N0}}"/>
+                <DataGridTextColumn Header="Đơn giá" Width="1*" Binding="{Binding donGia, StringFormat={}{0:N0} VNĐ}"/>
+                <DataGridTextColumn Header="Tổng tiền" Width="1*" Binding="{Binding tongTien, StringFormat={}{0:N0} VNĐ}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Window>
